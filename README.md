@@ -1,11 +1,11 @@
-# Nome do meu projeto
+# Predizendo a ocorrencia de "Churn" ou Desistência de Clientes utilizando Machine Learning
 
 Rápida descrição do objetivo de fazer esse projeto
 
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
-| :sparkles: Nome        | **Titulo do meu projeto**
-| :label: Tecnologias | java, html, ruby, c# (tecnologias utilizadas)
+| :sparkles: Nome        | **Predição de Churn utilizando Machine Learning**
+| :label: Tecnologias | Python & Machine Learning (Matplotlib | Seaborn | scikit learn )
 | :rocket: URL         | https://url-deploy.com.br
 | :fire: Desafio     | https://url-do-desafio.com.br
 
