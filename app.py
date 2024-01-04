@@ -75,7 +75,10 @@ modelo_tst.fit(x_train_1, y_train_1)
 y_pred_1 = modelo_tst.predict(x_test_1)
 
 import streamlit as st
-
+[theme]
+base="dark"
+primaryColor="#fcff4b"
+st.streamlit/config.toml([theme])
 
 st.title('# My First Data App')
 st.write('## Churn Predict Model with RandomForestClassifier')
