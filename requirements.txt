@@ -3,6 +3,5 @@ numpy
 dython
 category_encoders
 scikit-learn
-sklearn
 imblearn
 streamlit
