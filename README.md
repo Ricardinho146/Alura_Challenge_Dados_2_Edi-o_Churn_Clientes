@@ -15,4 +15,19 @@ Rápida descrição do objetivo de fazer esse projeto
 ## Detalhes do projeto
 
 
-Textos e imagens que descrevam seu projeto, suas conquistas, seus desafios, próximos passos, etc...
+Projeto desenvolvido durante o evento Challenge Dados 2ª Edição ministrado pela Alura, onde foi disponibilizado um dataset com dados de clientes de uma empresa de telecomunicação em foram realizados as atividades abaixo:
+
+1. Elaboração do DataFrame e limpeza dos dados;
+2. Análises estatisticas;
+3. Elaboração do modelo de machine learning para predizer a probabilidade de desistência dos clientes "Churn";
+4. Criado um DataApp com a biblioteca Streamlit onde o usuário pode simular diversas situações para o modelo de machine learning faça a predição de "Churn".
+
+## Acesse aos Notebooks utilizados no projeto:
+
+https://colab.research.google.com/drive/1rfEZLD1Afyk8frN68xzdhKXHS1YV5wdw?usp=sharing
+
+https://colab.research.google.com/drive/1CQr7nxRVSDkQSSq8Dv_EhhDdZuMFEuLZ?usp=sharing
+
+## Acesso o aplicativo:
+
+https://mypredictchurnapp.streamlit.app/
