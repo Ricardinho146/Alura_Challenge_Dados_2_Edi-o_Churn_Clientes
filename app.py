@@ -1,4 +1,4 @@
-#pip install -r requirements.txt
+#Importando as Bibliotecas
 
 import pandas as pd
 import numpy as np
@@ -11,6 +11,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import streamlit as st
 
+# Elaborando o DataFrame
 df = pd.read_json('https://challenge-data-science-3ed.s3.amazonaws.com/Telco-Customer-Churn.json')
 # Expandindo os dados da coluna "customer" e inserindo colunas no DataFrame
 expanded_data1 = pd.json_normalize(df['customer'])
@@ -40,6 +41,7 @@ df['Charges.Total'] = pd.to_numeric(df['Charges.Total'], errors='coerce')
 # Removendo dados nulos
 df = df.dropna(axis=0)
 
+# Normalizando os dados da coluna "Churn"
 lb = LabelEncoder()
 df['Churn']  = lb.fit_transform(df['Churn'])
 
@@ -50,7 +52,7 @@ df_tst = df.drop("customerID", axis =1)
 # Gerando uma lista com as colunas de dados categóricos
 dados_categóricos =identify_nominal_columns(df_tst)
 
-
+# Normalizando os dados das colunas Categoricas
 le = LabelEncoder()
 
 for coluna in dados_categóricos:
@@ -58,26 +60,32 @@ for coluna in dados_categóricos:
 
 df_tst.head()
 
+# Separando os dados Preditores do Dado Predito
 x_1 = df_tst.drop("Churn", axis =1)
 y_1 = df_tst.Churn
 
+# Aplicando a função de RandomOverSampler para igualar a proporção dos dados da Coluna "Churn" com base no que tem a menor ocorrência
 ros = RandomOverSampler(sampling_strategy = 1)
 
 x_ros_1, y_ros_1 = ros.fit_resample(x_1,y_1)
 
+# Separando os dados de Treino e Teste 
 x_train_1, x_test_1, y_train_1, y_test_1 = train_test_split(x_ros_1, y_ros_1, test_size = 0.2, random_state = 42 )
 
-
+# Criando o modelo de machine learning com RandomForestClassifier
 modelo_tst = RandomForestClassifier( random_state = 42)
 
 modelo_tst.fit(x_train_1, y_train_1)
 
+# Realizando a prediçaõ da coluna Churn com base nos dados Categoricos separados para teste
 y_pred_1 = modelo_tst.predict(x_test_1)
 
-
+# Tituloo do Aplicativo
 st.title('# My First Data App')
+#Subtitulo do aplicativo
 st.write('## Churn Predict Model with RandomForestClassifier')
 
+# Inserindo os elementos de seleção das vriaveis categóricas no aplicativo
 gender = st.selectbox("Select Gender: ", ['Female','Male'])
 SeniorCitizen = st.selectbox("Select SeniorCitizen: ", ['0','1'])
 partner = st.selectbox("Select Partner: ", ['Yes','No'])
@@ -98,7 +106,7 @@ paymentMethod = st.selectbox("Select PaymentMethod: ", ['Mailed check','Electron
 ChargesMonthly= st.slider("Select ChargesMonthly ", 18.25, 118.75)
 ChargesTotal= st.slider("Select ChargesTotal",18.8, 8684.8)
 
-
+# Definindo a função para coletar os dados inputados no aplicativo e carregar no modelo de machine learning
 def predict():
     input_data = {
         'gender': gender,
@@ -149,14 +157,17 @@ def predict():
 
     # Calcular a acurácia usando os dados de teste
     accuracy = modelo_tst.score(x_test_1, y_test_1)
-
+    
+    # Retornar o indice de acuracidade do modelo
     st.write(f'Model Accuracy: {accuracy:.2%}')
-
+    
+    # Função para retornar a mensagens quando "Churn" for verdadeiro ou seja quando há a probabilidade de desistência do cliente
     if prediction[0] == 1:
         st.success('Non-Quitting Customer :thumbsup:')
     else:
         st.error('Customer Abandonment :thumbsdown:')
 
+# Botão que executa o modelo de machine learning
 trigger = st.button('Predict', on_click=predict)
 
 
